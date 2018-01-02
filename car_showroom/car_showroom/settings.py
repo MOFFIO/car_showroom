@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'car_project'
+    'cars_project'
 ]
 
 MIDDLEWARE = [
@@ -121,4 +121,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-AUTH_USER_MODEL = 'car_project.MyUser'
+AUTH_USER_MODEL = 'cars_project.MyUser'

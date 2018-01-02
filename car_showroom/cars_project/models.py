@@ -3,12 +3,14 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser
+
 class Car(models.Model):
 
     uid = models.CharField(max_length=30, blank=True)
     brand = models.CharField(max_length=40)
     price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
-    attributes = models.OneToOne('CarAttributes')
+    attributes = models.OneToOneField('CarAttributes')
 
     def car_as_dict(self):
         car = {
@@ -40,4 +42,8 @@ class CarAttributes(models.Model):
                             default='Regular')
 
 class Dealership(models.Model):
-    cars = models.ManyToManyFields(Car)
+    cars = models.ManyToManyField(Car)
+
+class MyUser(AbstractUser):
+    org = models.ForeignKey(Dealership, null=True)
+
