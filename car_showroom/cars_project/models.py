@@ -39,3 +39,5 @@ class CarAttributes(models.Model):
     trim = models.CharField(max_length=30,
                             default='Regular')
 
+class Dealership(models.Model):
+    cars = models.ManyToManyFields(Car)
