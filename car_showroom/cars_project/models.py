@@ -12,6 +12,9 @@ class Car(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     attributes = models.OneToOneField('CarAttributes')
 
+    def __unicode__(self):
+        return '<Car_uid: %s, Brand: %s>' % (self.uid, self.brand)
+
     def car_as_dict(self):
         car = {
                 'uid' : self.uid,
