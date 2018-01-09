@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+     <meta charset="utf-8">
+    <title>Списочек моих ненаглядных машинок</title>
+</head>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'cars_project/style.css' %}" />
+<body>
+    <table border="2">
+        <caption>Сам список</caption>
+        <tr>
+            <th>UID</th>
+            <th>BRAND</th>
+            <th>PRICE</th>
+            <th>PAINT</th>
+            <th>TIRES</th>
+            <th>TRIM</th>
+        </tr>
+        {% if car_list %}
+            {% for car in car_list %}
+                <tr>
+                <td>{{ car.uid}}</td>
+                <td>{{ car.brand}}</td>
+                <td>{{ car.price}}</td>
+                <td>{{ car.attributes.paint }}</td>
+                <td>{{ car.attributes.tires }}</td>
+                <td>{{ car.attributes.trim }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <p>No cars are avalible.</p>
+        {% endif %}
+
+{% load staticfiles %}
+
+    </table>
+</body>
+</html>
+
+
