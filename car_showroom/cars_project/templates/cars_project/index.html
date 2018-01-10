@@ -7,7 +7,10 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'cars_project/style.css' %}" />
 <body>
-    <table border="2">
+    <header>
+        <h1>Car info site</h1>
+    </header>
+    <table background="{% static 'cars_project/images/background-1280x720.jpg' %}" cellpadding="7" border="2" width="100%">
         <caption>Car list table</caption>
         <tr>
             <th>UID</th>
@@ -17,7 +20,6 @@
             <th>TIRES</th>
             <th>TRIM</th>
         </tr>
-        {% if car_list %}
             {% for car in car_list %}
                 <tr>
                 <td>{{ car.uid}}</td>
@@ -28,9 +30,6 @@
                 <td>{{ car.attributes.trim }}</td>
                 </tr>
             {% endfor %}
-        {% else %}
-            <p>No cars are avalible.</p>
-        {% endif %}
 
 {% load staticfiles %}
 
