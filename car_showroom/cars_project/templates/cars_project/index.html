@@ -10,30 +10,36 @@
     <header>
         <h1>Car info site</h1>
     </header>
-    <table background="{% static 'cars_project/images/background-1280x720.jpg' %}" cellpadding="7" border="2" width="100%">
-        <caption>Car list table</caption>
-        <tr>
-            <th>UID</th>
-            <th>BRAND</th>
-            <th>PRICE</th>
-            <th>PAINT</th>
-            <th>TIRES</th>
-            <th>TRIM</th>
-        </tr>
-            {% for car in car_list %}
-                <tr>
-                <td>{{ car.uid}}</td>
-                <td>{{ car.brand}}</td>
-                <td>{{ car.price}}</td>
-                <td>{{ car.attributes.paint }}</td>
-                <td>{{ car.attributes.tires }}</td>
-                <td>{{ car.attributes.trim }}</td>
-                </tr>
-            {% endfor %}
+    {% if car_list %}
+        <table cellpadding="7" border="2" width="100%">
+            <caption>Car list table</caption>
+            <tr>
+                <th>UID</th>
+                <th>BRAND</th>
+                <th>PRICE</th>
+                <th>PAINT</th>
+                <th>TIRES</th>
+                <th>TRIM</th>
+            </tr>
+                {% for car in car_list %}
+                    <tr>
+                    <td>{{ car.uid }}</td>
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.price }}</td>
+                    <td>{{ car.attributes.paint }}</td>
+                    <td>{{ car.attributes.tires }}</td>
+                    <td>{{ car.attributes.trim }}</td>
+                    </tr>
+                {% endfor %}
 
-{% load staticfiles %}
+    {% else %}
+        <div class="empty-db-message">
+            <font class="error-style" > No records in database </font>
+        </div>
+    {% endif %}
+    {% load staticfiles %}
 
-    </table>
+        </table>
 </body>
 </html>
 

@@ -121,5 +121,5 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-AUTH_USER_MODEL = 'cars_project.MyUser'
+AUTH_USER_MODEL = 'cars_project.User'
 STATIC_URL = '/static/'
