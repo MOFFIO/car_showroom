@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl" href="vehicles.xsl"?>
+<vehicles>
+    <vehicle year="2004" make="Acura" model="3.2TL">
+        <mileage>13495</mileage>
+        <color>green</color>
+        <price>33900</price>
+        <tires>standard</tires>
+        <carfax buyback="no" />
+    </vehicle>
+    <vehicle year="2017" make="Acura" model="3.2TL">
+        <mileage>07541</mileage>
+        <color>white</color>
+        <price>33900</price>
+        <tires>standard</tires>
+        <carfax buyback="yes" />
+    </vehicle>
+    <vehicle year="2004" make="Acura" model="3.2TL">
+        <mileage>18753</mileage>
+        <color>white</color>
+        <price>32900</price>
+        <tires>standard</tires>
+        <carfax buyback="yes" />
+    </vehicle>
+</vehicles>

@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login page</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'cars_project/style.css' %}" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+
+<body>
+
+<div class="main">
+    <div class="regform">
+        <div class="formline">
+            {% if user.is_authenticated %}
+            <p>Вы вошли как {{ user.username }} [{{ user.first_name }} {{ user.last_name }}].
+            <a href="{% url 'logout' %}">Выход</a></p>
+            {% else %}
+            <p>Вы не вошли в систему. <a href="{% url 'login' %}">Войти</a> </p>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+{% block body %}{% endblock %}
+
+</div>
+</body>
+</html>
+
