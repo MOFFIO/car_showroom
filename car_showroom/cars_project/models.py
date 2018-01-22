@@ -2,8 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
 from django.contrib.auth.models import AbstractUser
+
+
+
 
 class Car(models.Model):
 
@@ -39,8 +41,8 @@ class CarAttributes(models.Model):
     )
     paint = models.CharField(max_length=30,)
     tires = models.CharField(max_length=30,
-                            choices=CAR_ATTRIBUTES,
-                            default=REGULAR)
+                             choices=CAR_ATTRIBUTES,
+                             default=REGULAR)
     trim = models.CharField(max_length=30,
                             default='Regular')
 
@@ -49,4 +51,6 @@ class Dealership(models.Model):
 
 class User(AbstractUser):
     org = models.ForeignKey(Dealership, null=True)
+
+
 

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form class="login" id="register" method="post">
+    {% csrf_token %}
+    <h1>Register here</h1>
+    <fieldset id="inputs">
+      {{ form.as_p }}
+    </fieldset>
+    <fieldset id="actions">
+        <input type="submit" id="submit" value="Submit">
+        <a href="">Forgot password?</a><a href="{% url 'register' %}" >Sign up</a>
+    </fieldset>
+</form>
+{% endblock %}

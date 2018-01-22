@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 import os
+
 from lxml import etree
 from django.core.management.base import BaseCommand, CommandError
+
 from cars_project.models import Car, CarAttributes
 
 

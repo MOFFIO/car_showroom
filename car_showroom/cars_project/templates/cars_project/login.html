@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Login page</title>
-  {% load staticfiles %}
-  <link rel="stylesheet" type="text/css" href="{% static 'cars_project/style.css' %}" />
-</head>
+{% extends 'base.html' %}
 
-<body>
-
-<form id="login" method="post">
+{% block body %}
+<form class="login" method="post">
     {% csrf_token %}
     <h1>Please login</h1>
     <fieldset id="inputs">
@@ -17,11 +9,9 @@
     </fieldset>
     <fieldset id="actions">
         <input type="submit" id="submit" value="Submit">
-        <a href="">Forgot password?</a><a href="">Sign up</a>
+        <a href="">Forgot password?</a><a href="{% url 'register' %}" >Sign up</a>
     </fieldset>
 </form>
-</body>
-</html>
-
+{% endblock %}
 
 

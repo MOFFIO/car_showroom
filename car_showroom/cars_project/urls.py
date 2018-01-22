@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import url
 
-from cars_project import views
-from cars_project import form
+from cars_project import views, form
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^login/$', form.LoginFormView.as_view()),
-    url(r'^logout/$', form.LogoutView.as_view())
+    url(r'^login/$', form.LoginFormView.as_view(), name='login'),
+    url(r'^logout/$', form.LogoutView.as_view(), name='logout'),
+    url(r'^register/$', form.RegisterFormView.as_view(), name='register'),
     ]

@@ -25,7 +25,7 @@ SECRET_KEY = 'p#v28&k0_p-581&()@!uiyeoccr_7i&ollvb1%g(*!5co^dp8)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
 
 
 # Application definition
@@ -123,3 +123,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'cars_project.User'
 STATIC_URL = '/static/'
+
+#APPEND_SLASH = True
