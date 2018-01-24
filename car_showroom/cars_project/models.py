@@ -13,6 +13,9 @@ class Car(models.Model):
     brand = models.CharField(max_length=40)
     price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     attributes = models.OneToOneField('CarAttributes')
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+    sold = models.BooleanField(default=False)
 
     def __unicode__(self):
         return '<Car_uid: %s, Brand: %s>' % (self.uid, self.brand)
