@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block title %}
 <title>Car detail page</title>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'cars_project/js/gethexcolor.js' %}"></script>
 {% endblock %}
 
 {% block body %}
