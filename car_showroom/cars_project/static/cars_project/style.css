@@ -68,7 +68,6 @@ body
     background-image: -ms-linear-gradient(top, #fff, #eee);
     background-image: -o-linear-gradient(top, #fff, #eee);
     background-image: linear-gradient(top, #fff, #eee);
-    height: 330px;
     width: 400px;
     margin: -150px 0 0 -230px;
     padding: 30px;

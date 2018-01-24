@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^login/$', form.LoginFormView.as_view(), name='login'),
     url(r'^logout/$', form.LogoutView.as_view(), name='logout'),
     url(r'^register/$', form.RegisterFormView.as_view(), name='register'),
+    url(r'^cars/(?P<car_id>\d+)/$', views.car_detail, name='car_detail'),
     ]

@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<title>Start page</title>
+{% endblock %}
+
 {% block body %}
     <header>
         <h1>Car info site</h1>
@@ -8,7 +12,7 @@
         <table cellpadding="7" border="2" width="100%">
             <caption>Car list table</caption>
             <tr>
-                <th>UID</th>
+                <th>UID </th>
                 <th>BRAND</th>
                 <th>PRICE</th>
                 <th>PAINT</th>
@@ -17,7 +21,7 @@
             </tr>
                 {% for car in car_list %}
                     <tr>
-                    <td>{{ car.uid }}</td>
+                    <td><a href="{% url 'car_detail' car_id=car.id %}" >{{ car.uid }}</a></td>
                     <td>{{ car.brand }}</td>
                     <td>{{ car.price }}</td>
                     <td>{{ car.attributes.paint }}</td>

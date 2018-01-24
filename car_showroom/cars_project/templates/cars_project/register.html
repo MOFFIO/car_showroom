@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<title>Register page</title>
+{% endblock %}
+
 {% block body %}
 <form class="login" id="register" method="post">
     {% csrf_token %}

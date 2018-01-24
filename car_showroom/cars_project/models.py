@@ -19,14 +19,21 @@ class Car(models.Model):
 
     def car_as_dict(self):
         car = {
-                'uid' : self.uid,
-                'brand' : self.brand,
-                'price' : self.price,
-                'paint' : self.attributes.paint,
-                'tires' : self.attributes.tires,
-                'trim' : self.attributes.trim
-                }
+            'uid' : self.uid,
+            'brand' : self.brand,
+            'price' : self.price,
+            'paint' : self.attributes.paint,
+            'tires' : self.attributes.tires,
+            'trim' : self.attributes.trim
+            }
         return car
+
+    @classmethod
+    def cars_for_user(cls, user):
+        if user.org:
+            return Car.objects.filter(dealership=user.org)
+        return Car.objects.none()
+
 
 class CarAttributes(models.Model):
     REGULAR = 'RG'
