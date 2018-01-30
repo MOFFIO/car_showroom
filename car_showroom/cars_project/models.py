@@ -17,6 +17,7 @@ class Car(models.Model):
     updated_at = models.DateField(auto_now=True)
     sold = models.BooleanField(default=False)
     car_img = models.ImageField(upload_to="cars_project/car_foto", default="cars_project/car_foto/no_img.png")
+    car_logo = models.ImageField(upload_to="cars_project/car_logo", default="cars_project/car_logo/no-logo-available.gif")
 
     def __unicode__(self):
         return '<Car_uid: %s, Brand: %s>' % (self.uid, self.brand)

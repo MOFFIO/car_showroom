@@ -21,14 +21,14 @@
             <span> {{ car.uid }} </span>
         </div>
         <div class="car-img-div">
-            <img src="{% static 'cars_project/car_foto/mercedes_avto_2560x1600.jpg' %}" >
+            <img src="{% static 'cars_project/car_foto/no_img.png' %}" >
             Car Photo:
         </div>
         <div class="all-cars-div">
             <div class="form-brand-div">
                 Brand
                 <div class="form-brand-value-div">
-                    <img src="{% static 'cars_project/car_logo/mercedes-logo.png' %}" >
+                    <img src="{% static 'cars_project/car_logo/no-logo-available.gif' %}" >
 
                     {{ car.brand }}
                 </div>
@@ -61,7 +61,11 @@
             <div class="form-sold-div">
                 SOLD
                 <div class="form-sold-value-div">
-                    <img src="{% static 'cars_project/car_logo/checkbox-checked-300px.png' %}" >
+                    {% if car.sold %}
+                        <img src="{% static 'cars_project/car_logo/checkbox-checked-300px.png' %}" >
+                    {% else %}
+                        <img src="{% static 'cars_project/car_logo/checkbox-unchecked-300px.png' %}" >
+                    {% endif %}
                 </div>
             </div>
         </div>
