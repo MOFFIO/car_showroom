@@ -57,6 +57,9 @@ class CarAttributes(models.Model):
     trim = models.CharField(max_length=30,
                             default='Regular')
 
+    def get_paint_text(self):
+        return self.paint.lower()
+
 class Dealership(models.Model):
     cars = models.ManyToManyField(Car)
 

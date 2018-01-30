@@ -12,6 +12,70 @@
 
 {% block body %}
     <header>
-        <h1>Car info site</h1>
+        <h1>Car detail</h1>
     </header>
+
+    <div class="massive-div">
+        <div class="car-id-div">
+            CAR_ID:
+            <span> {{ car.uid }} </span>
+        </div>
+        <div class="car-img-div">
+            <img src="{% static 'cars_project/car_foto/mercedes_avto_2560x1600.jpg' %}" >
+            Car Photo:
+        </div>
+        <div class="all-cars-div">
+            <div class="form-brand-div">
+                Brand
+                <div class="form-brand-value-div">
+                    <img src="{% static 'cars_project/car_logo/mercedes-logo.png' %}" >
+
+                    {{ car.brand }}
+                </div>
+            </div>
+            <div class="form-price-paint-tires-trim-div">
+                PRICE
+                <div class="form-price-paint-tires-trim-value-div">
+                    {{ car.price }}
+                </div>
+            </div>
+            <div class="form-price-paint-tires-trim-div">
+                PAINT
+                <div class="form-paint-value-div">
+                    <div id="paint" >&nbsp</div>
+
+                </div>
+            </div>
+            <div class="form-price-paint-tires-trim-div">
+                TIRES
+                <div class="form-price-paint-tires-trim-value-div">
+                    {{ car.attributes.tires }}
+                </div>
+            </div>
+            <div class="form-price-paint-tires-trim-div">
+                TRIM
+                <div class="form-price-paint-tires-trim-value-div">
+                    {{ car.attributes.trim }}
+                </div>
+            </div>
+            <div class="form-sold-div">
+                SOLD
+                <div class="form-sold-value-div">
+                    <img src="{% static 'cars_project/car_logo/checkbox-checked-300px.png' %}" >
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+{% block pagescript %}
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', DrawPaint, false);
+    function DrawPaint() {
+        var el = document.getElementById("paint");
+        console.log(el);
+        el.style.backgroundColor = getHexColor("{{ car.attributes.get_paint_text }}");
+    };
+</script>
 {% endblock %}

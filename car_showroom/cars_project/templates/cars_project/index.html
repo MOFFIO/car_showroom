@@ -18,6 +18,7 @@
                 <th>PAINT</th>
                 <th>TIRES</th>
                 <th>TRIM</th>
+                <th>SOLD</th>
             </tr>
                 {% for car in car_list %}
                     <tr>
@@ -27,6 +28,7 @@
                     <td>{{ car.attributes.paint }}</td>
                     <td>{{ car.attributes.tires }}</td>
                     <td>{{ car.attributes.trim }}</td>
+                    <td>{{ car.sold }}</td>
                     </tr>
                 {% endfor %}
 
