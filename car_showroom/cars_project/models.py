@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+import sys
+import fnmatch
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -38,6 +42,18 @@ class Car(models.Model):
         if user.org:
             return Car.objects.filter(dealership=user.org)
         return Car.objects.none()
+
+    def get_car_logo(self):
+        if not self.car_logo or self.car_logo == 'cars_project/car_logo/no-logo-available.gif':
+            dirname = os.path.dirname(os.path.realpath(sys.argv[0]))
+            logo_path = "/cars_project/static/cars_project/car_logo/"
+            car_logo_path = os.path.join(dirname + logo_path)
+            for item in os.listdir(car_logo_path):
+                if fnmatch.fnmatch(item, (self.brand.lower() + '*.*')):
+                    self.car_logo = os.path.join("cars_project/car_logo", item)
+                    self.save()
+        return self.car_logo
+
 
 
 class CarAttributes(models.Model):

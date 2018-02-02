@@ -40,6 +40,23 @@ class MyTest(TestCase):
         response = self.client.get(reverse('index'))
         self.assertEqual(list((response.context['car_list'])), [])
 
+    def test_car_get_car_logo_when_no_logo_should_return_default(self):
+        CarFactory.create()
+        car = Car.objects.get(id=1)
+        self.assertEqual(car.get_car_logo(), "cars_project/car_logo/no-logo-available.gif" )
+
+    def test_car_get_car_logo_when_logo_exist_should_return_car_logo(self):
+        CarFactory.create(brand = 'Acura')
+        car = Car.objects.get(id=1)
+        car.save()
+        self.assertEqual(car.get_car_logo(), "cars_project/car_logo/acura-logo.png")
+
+    def test_car_get_car_logo_when_car_have_logo_should_return_it(self):
+        CarFactory.create(car_logo = "cars_project/car_logo/just-blah-blah-blah.png")
+        car = Car.objects.get(id=1)
+        car.save()
+        self.assertEqual(car.get_car_logo(), "cars_project/car_logo/just-blah-blah-blah.png")
+
 
 class CommandsTestCase(TestCase):
 

@@ -22,14 +22,13 @@
         </div>
         <div class="car-img-div">
             <img src="{% static 'cars_project/car_foto/no_img.png' %}" >
-            Car Photo:
+
         </div>
         <div class="all-cars-div">
             <div class="form-brand-div">
                 Brand
                 <div class="form-brand-value-div">
-                    <img src="{% static 'cars_project/car_logo/no-logo-available.gif' %}" >
-
+                    <img src="{% static car.get_car_logo.url %}" >
                     {{ car.brand }}
                 </div>
             </div>
