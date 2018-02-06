@@ -5,8 +5,12 @@ import os
 import sys
 import fnmatch
 
+from urlparse import urlparse
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from sorl.thumbnail import get_thumbnail
+
 
 
 
@@ -20,8 +24,8 @@ class Car(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     sold = models.BooleanField(default=False)
-    car_img = models.ImageField(upload_to="cars_project/car_foto", default="cars_project/car_foto/no_img.png")
-    car_logo = models.ImageField(upload_to="cars_project/car_logo", default="cars_project/car_logo/no-logo-available.gif")
+    car_img = models.ImageField(upload_to="static/cars_project/car_foto", default="static/cars_project/car_foto/no_img.png")
+    car_logo = models.ImageField(upload_to="static/cars_project/car_logo", default="static/cars_project/car_logo/no-logo-available.gif")
 
     def __unicode__(self):
         return '<Car_uid: %s, Brand: %s>' % (self.uid, self.brand)
@@ -54,6 +58,11 @@ class Car(models.Model):
                     self.save()
         return self.car_logo
 
+    def get_image_483x321(self):
+        import ipdb; ipdb.set_trace()
+        url = self.car_img.url
+        #return self.car_img
+        return get_thumbnail(url, '483x321', crop='center', quality=99)
 
 
 class CarAttributes(models.Model):
