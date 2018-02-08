@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django import forms
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
@@ -6,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 
+from cars_project.models import Car, CarAttributes
 from cars_project.admin import MyUserCreationForm
 
 
@@ -35,3 +37,17 @@ class RegisterFormView(FormView):
     def form_valid(self, form):
         form.save()
         return super(RegisterFormView, self).form_valid(form)
+
+
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['uid', 'brand', 'price', 'car_logo', 'car_img', 'sold']
+
+
+class CarFormAttributes(forms.ModelForm):
+    class Meta:
+        model = CarAttributes
+        fields = ['paint', 'tires', 'trim']
+
+

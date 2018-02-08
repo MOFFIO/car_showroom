@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Car edit page</title>
+{% endblock %}
+
+{% block body %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ car_form.as_ul }}
+        {{ car_form_attributes.as_ul }}
+        <button type="submit">Save</button>
+    </form>
+
+{% endblock %}

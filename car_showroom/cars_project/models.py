@@ -5,12 +5,14 @@ import os
 import sys
 import fnmatch
 
-from urlparse import urlparse
+#from urlparse import urlparse
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from sorl.thumbnail import get_thumbnail
+#from django.contrib.staticfiles.templatetags.staticfiles import static
+#from sorl.thumbnail import get_thumbnail
 
+
+from django.urls import reverse
 
 
 
@@ -59,11 +61,13 @@ class Car(models.Model):
         return self.car_logo
 
     def get_image_483x321(self):
-        import ipdb; ipdb.set_trace()
-        url = self.car_img.url
-        #return self.car_img
-        return get_thumbnail(url, '483x321', crop='center', quality=99)
+        #import ipdb; ipdb.set_trace()
+        #url = self.car_img.url
+        return self.car_img
+        #return get_thumbnail(url, '483x321', crop='center', quality=99)
 
+    def get_absolute_url(self):
+        return reverse('car_form', kwargs={'pk': self.pk})
 
 class CarAttributes(models.Model):
     REGULAR = 'RG'
