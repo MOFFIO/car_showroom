@@ -21,14 +21,14 @@
             <span> {{ car.uid }} </span>
         </div>
         <div class="car-img-div">
-            <img src="{% static 'cars_project/car_foto/no_img.png' %}" >
+            <img src="{{ car.car_img.url }}" >
 
         </div>
         <div class="all-cars-div">
             <div class="form-brand-div">
                 Brand
                 <div class="form-brand-value-div">
-                    <img src="{% static car.get_car_logo.url %}" >
+                    <img src="{{ car.get_car_logo.url }}" >
                     {{ car.brand }}
                 </div>
             </div>
@@ -61,12 +61,16 @@
                 SOLD
                 <div class="form-sold-value-div">
                     {% if car.sold %}
-                        <img src="{% static 'cars_project/car_logo/checkbox-checked-300px.png' %}" >
+                        <img src="{% static 'cars_project/images/checkbox-checked-300px.png' %}" >
                     {% else %}
-                        <img src="{% static 'cars_project/car_logo/checkbox-unchecked-300px.png' %}" >
+                        <img src="{% static 'cars_project/images/checkbox-unchecked-300px.png' %}" >
                     {% endif %}
                 </div>
             </div>
+        <form action="{% url 'car_form_edit' car_id=car.id %}">
+            <button type="submit">Edit car</button>
+        </form>
+
         </div>
 
 

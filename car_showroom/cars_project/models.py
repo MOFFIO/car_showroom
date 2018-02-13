@@ -26,8 +26,8 @@ class Car(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     sold = models.BooleanField(default=False)
-    car_img = models.ImageField(upload_to="static/cars_project/car_foto", default="static/cars_project/car_foto/no_img.png")
-    car_logo = models.ImageField(upload_to="static/cars_project/car_logo", default="static/cars_project/car_logo/no-logo-available.gif")
+    car_img = models.ImageField(upload_to="cars_project/car_foto", default="cars_project/car_foto/no_img.png")
+    car_logo = models.ImageField(upload_to="cars_project/car_logo", default="cars_project/car_logo/no-logo-available.gif")
 
     def __unicode__(self):
         return '<Car_uid: %s, Brand: %s>' % (self.uid, self.brand)
@@ -52,7 +52,7 @@ class Car(models.Model):
     def get_car_logo(self):
         if not self.car_logo or self.car_logo == 'cars_project/car_logo/no-logo-available.gif':
             dirname = os.path.dirname(os.path.realpath(sys.argv[0]))
-            logo_path = "/cars_project/static/cars_project/car_logo/"
+            logo_path = "/media/cars_project/car_logo/"
             car_logo_path = os.path.join(dirname + logo_path)
             for item in os.listdir(car_logo_path):
                 if fnmatch.fnmatch(item, (self.brand.lower() + '*.*')):
@@ -67,7 +67,7 @@ class Car(models.Model):
         #return get_thumbnail(url, '483x321', crop='center', quality=99)
 
     def get_absolute_url(self):
-        return reverse('car_form', kwargs={'pk': self.pk})
+        return reverse('car_form', kwargs={'car_id': self.id})
 
 class CarAttributes(models.Model):
     REGULAR = 'RG'
