@@ -92,7 +92,7 @@ class CarAttributes(models.Model):
 
 class Dealership(models.Model):
     cars = models.ManyToManyField(Car)
-
+    logo = models.ImageField(upload_to="cars_project/logo", default="cars_project/car_logo/no-logo-available.gif")
 
 class User(AbstractUser):
     org = models.ForeignKey(Dealership, null=True)
