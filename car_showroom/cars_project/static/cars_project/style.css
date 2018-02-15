@@ -1,3 +1,22 @@
+.h1 h1.h1{
+font-size: 20px;
+}
+
+
+.main div.edit-car-form {
+    padding: 20px;
+    font-size: 14px;
+    display: inline-block;
+    background-color: #E8E8E8;
+    margin-left: 33%;
+    margin-top: -4%;
+}
+
+
+.errorlist {
+    color: red;
+}
+
 li a {
     color: green;
 }
@@ -131,7 +150,7 @@ div.formline {
     display: inline;
     height: 100%;
     text-align: right;
-    margin-top: -20px;
+    margin-top: 1px;
 }
 
 .main div {
@@ -156,6 +175,7 @@ body
     font: 16px 'Lucida Sans Unicode', 'Trebuchet MS', Arial, Helvetica;
     margin: 0;
     background: url(images/bg.png) repeat;
+    line-height: 1.2;
 }
 
 /*--------------------*/
@@ -163,8 +183,7 @@ body
 
 #register
 {
-    height: 630px;
-    top: 25%;
+    top: 22%;
 }
 
 .login
@@ -178,7 +197,7 @@ body
     background-image: linear-gradient(top, #fff, #eee);
     width: 400px;
     margin: -150px 0 0 -230px;
-    padding: 30px;
+    padding: 20px;
     position: absolute;
     top: 30%;
     left: 50%;

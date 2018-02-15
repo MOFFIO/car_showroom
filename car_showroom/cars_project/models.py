@@ -93,6 +93,7 @@ class CarAttributes(models.Model):
 class Dealership(models.Model):
     cars = models.ManyToManyField(Car)
 
+
 class User(AbstractUser):
     org = models.ForeignKey(Dealership, null=True)
 

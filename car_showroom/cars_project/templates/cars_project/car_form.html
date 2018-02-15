@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load bootstrap3 %}
+<script src="{% bootstrap_jquery_url %}"></script>
+{% bootstrap_javascript %}
+{% bootstrap_css %}
 
 {% block title %}
 <title>Car edit page</title>
 {% endblock %}
 
 {% block body %}
-    <div>
-    <form enctype="multipart/form-data" method="POST">
-        <fieldset>
+    <div class="edit-car-form">
+    <form role="form" method="post" enctype="multipart/form-data" {% if layout != 'vertical' %} class="form-{{ layout }}"{% endif %}>
         {% csrf_token %}
-        {{ car_form.as_ul }}
-        {{ car_form_attributes.as_ul }}
-        </fieldset>
-        <button type="submit">Save</button>
+        {% bootstrap_form car_form layout=layout %}
+        {% bootstrap_form car_form_attributes layout=layout %}
+        <button class="btn btn-success" type="submit">Save</button>
     </form>
     </div>
 {% endblock %}
