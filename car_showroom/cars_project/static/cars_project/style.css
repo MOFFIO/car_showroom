@@ -163,21 +163,26 @@ font.error-style {
     font-family: Tahoma;
 }
 
-html, body
-{
+html, body {
     min-width:980px;
     margin: 40px;
     height: 90%;
 }
 
-body
-{
+body {
     font: 16px 'Lucida Sans Unicode', 'Trebuchet MS', Arial, Helvetica;
     margin: 0;
     background: url(images/bg.png) repeat;
     line-height: 1.2;
 }
 
+.d-logo img {
+    display: block;
+    height: 100px;
+    width: 100px;
+    margin-top: -2%;
+    margin-bottom: -5%;
+}
 /*--------------------*/
 
 

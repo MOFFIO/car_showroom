@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
 <div class="main">
     <div class="regform">
         <div class="formline">
@@ -24,6 +23,12 @@
             <p>Вы не вошли в систему. <a href="{% url 'login' %}">Войти</a> </p>
             {% endif %}
         </div>
+    </div>
+    <div class="d-logo">
+        {% if user.is_authenticated %}
+          <img src="{{ d_logo.url }}">
+        {% else %}
+        {% endif %}
     </div>
 
 
