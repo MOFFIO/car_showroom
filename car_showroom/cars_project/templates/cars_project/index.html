@@ -40,5 +40,10 @@
     {% load staticfiles %}
 
         </table>
+        <form action="{% url 'car_form' %}">
+            <button type="submit">Create car</button>
+        </form>
+
 {% endblock %}
+
 

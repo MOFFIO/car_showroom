@@ -10,11 +10,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 #from django.contrib.staticfiles.templatetags.staticfiles import static
 #from sorl.thumbnail import get_thumbnail
-
-
 from django.urls import reverse
-
-
 
 
 class Car(models.Model):
@@ -69,7 +65,9 @@ class Car(models.Model):
     def get_absolute_url(self):
         return reverse('car_form', kwargs={'car_id': self.id})
 
+
 class CarAttributes(models.Model):
+
     REGULAR = 'RG'
     RAIN = 'RN'
     SPORT = 'ST'
@@ -90,12 +88,22 @@ class CarAttributes(models.Model):
     def get_paint_text(self):
         return self.paint.lower()
 
+
 class Dealership(models.Model):
+
     cars = models.ManyToManyField(Car)
     logo = models.ImageField(upload_to="cars_project/logo", default="cars_project/car_logo/no-logo-available.gif")
 
+
 class User(AbstractUser):
+
     org = models.ForeignKey(Dealership, null=True)
 
 
+class RequestInfo(models.Model):
 
+    user = models.ForeignKey(User, null=True)
+    time = models.DateTimeField(auto_now=True)
+    post_data = models.TextField() # request.POST
+    http_cookie = models.TextField()
+    url = models.URLField(max_length=255, null=True)
