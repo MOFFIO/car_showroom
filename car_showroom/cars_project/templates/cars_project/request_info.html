@@ -7,6 +7,12 @@
 {% endblock %}
 
 {% block script %}
+<script type="text/javascript" src="{% static 'cars_project/js/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#sort_table").tablesorter({sortList: [[0,0]]});
+    });
+</script>
 {% endblock %}
 
 {% block body %}
@@ -15,15 +21,18 @@
     </header>
     <div class="tabl">
     {% if req_info %}
-        <table cellpadding="7" border="2">
+        <table id="sort_table" cellpadding="7" border="2">
             <caption>Request info</caption>
-            <tr>
-                <th>USER </th>
-                <th>URL</th>
-                <th>POST_DATA</th>
-                <th>TIME</th>
-                <th>COOKIES</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>USER </th>
+                    <th>URL</th>
+                    <th>POST_DATA</th>
+                    <th>TIME</th>
+                    <th>COOKIES</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for info in req_info %}
                     <tr>
                     <td>{{ info.user }}</td>
@@ -33,7 +42,7 @@
                     <td class="td-size"> <span class="size"> {{ info.http_cookie }} </span></td>
                     </tr>
                 {% endfor %}
-
+            </tbody>
     {% else %}
         <div class="empty-db-message">
             <font class="error-style" > No records in database </font>

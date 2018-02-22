@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block title %}
 <title>Start page</title>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'cars_project/js/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#sort_table").tablesorter({sortList: [[0,0]]});
+    });
+</script>
 {% endblock %}
 
 {% block body %}
@@ -9,17 +20,20 @@
         <h1>Car info site</h1>
     </header>
     {% if car_list %}
-        <table cellpadding="7" border="2" width="100%">
+        <table id="sort_table" cellpadding="7" border="2" width="100%">
             <caption>Car list table</caption>
-            <tr>
-                <th>UID </th>
-                <th>BRAND</th>
-                <th>PRICE</th>
-                <th>PAINT</th>
-                <th>TIRES</th>
-                <th>TRIM</th>
-                <th>SOLD</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>UID </th>
+                    <th>BRAND</th>
+                    <th>PRICE</th>
+                    <th>PAINT</th>
+                    <th>TIRES</th>
+                    <th>TRIM</th>
+                    <th>SOLD</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for car in car_list %}
                     <tr>
                     <td><a href="{% url 'car_detail' car_id=car.id %}" >{{ car.uid }}</a></td>
@@ -31,7 +45,7 @@
                     <td>{{ car.sold }}</td>
                     </tr>
                 {% endfor %}
-
+            </tbody>
     {% else %}
         <div class="empty-db-message">
             <font class="error-style" > No records in database </font>
