@@ -97,7 +97,7 @@ class Dealership(models.Model):
 
 class User(AbstractUser):
 
-    org = models.ForeignKey(Dealership, null=True)
+    org = models.ForeignKey(Dealership, null=True, blank=True)
 
 
 class RequestInfo(models.Model):

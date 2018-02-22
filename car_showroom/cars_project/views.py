@@ -5,10 +5,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 
-from cars_project.models import Car
+from cars_project.models import Car, RequestInfo
 from cars_project.form import CarForm, CarFormAttributes
 
 
@@ -25,6 +25,14 @@ def car_detail(request, car_id):
     cars = Car.cars_for_user(user=request.user)
     context = {'car': cars.get(id=car_id)}
     return render(request, 'cars_project/car_detail.html', context)
+
+@login_required(login_url='login/')
+def request_info(request):
+    if request.user.is_superuser:
+        req_info = RequestInfo.objects.all()
+        context = {'req_info': req_info}
+        return render(request, 'cars_project/request_info.html', context)
+    raise Http404('U are not SuperUser')
 
 
 class CarFormEdit(View):

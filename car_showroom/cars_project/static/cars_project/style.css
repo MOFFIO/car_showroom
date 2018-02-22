@@ -2,6 +2,26 @@
 font-size: 20px;
 }
 
+.size {
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   }
+.size:hover {
+    background: #f0f0f0; /* Цвет фона */
+    white-space: normal; /* Обычный перенос текста */
+   }
+
+   .td-size {
+    max-width: 280px;
+   }
+.tabl {
+    margin-bottom: 50px;
+}
 
 .main div.edit-car-form {
     padding: 20px;

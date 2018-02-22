@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Request info</title>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Request info</h1>
+    </header>
+    <div class="tabl">
+    {% if req_info %}
+        <table cellpadding="7" border="2">
+            <caption>Request info</caption>
+            <tr>
+                <th>USER </th>
+                <th>URL</th>
+                <th>POST_DATA</th>
+                <th>TIME</th>
+                <th>COOKIES</th>
+            </tr>
+                {% for info in req_info %}
+                    <tr>
+                    <td>{{ info.user }}</td>
+                    <td>{{ info.url }}</td>
+                    <td class="td-size"> <span class="size"> {{ info.post_data }} </span></td>
+                    <td>{{ info.time }}</td>
+                    <td class="td-size"> <span class="size"> {{ info.http_cookie }} </span></td>
+                    </tr>
+                {% endfor %}
+
+    {% else %}
+        <div class="empty-db-message">
+            <font class="error-style" > No records in database </font>
+        </div>
+    {% endif %}
+    </div>
+    {% load staticfiles %}
+{% endblock %}
