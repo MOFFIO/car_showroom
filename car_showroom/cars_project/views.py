@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse
@@ -13,6 +14,13 @@ from cars_project.form import CarForm, CarFormAttributes
 
 
 # Create your views here.
+
+
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
 
 @login_required(login_url='login/')
 def index(request):
