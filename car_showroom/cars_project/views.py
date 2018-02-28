@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 
 from cars_project.models import Car, RequestInfo
-from cars_project.form import CarForm, CarFormAttributes
+from cars_project.form import CarForm, CarFormAttributes, CarSold
 
 
 # Create your views here.
@@ -22,11 +22,11 @@ def handler404(request):
     response.status_code = 404
     return response
 
-@login_required(login_url='login/')
-def index(request):
-    car_list = Car.cars_for_user(user=request.user)
-    context = {'car_list': car_list}
-    return render(request, 'cars_project/index.html', context)
+#@login_required(login_url='login/')
+#def index(request):
+#    car_list = Car.cars_for_user(user=request.user)
+#    context = {'car_list': car_list}
+#    return render(request, 'cars_project/index.html', context)
 
 @login_required(login_url='login/')
 def car_detail(request, car_id):
@@ -41,6 +41,25 @@ def request_info(request):
         context = {'req_info': req_info}
         return render(request, 'cars_project/request_info.html', context)
     raise Http404('U are not SuperUser')
+
+
+
+class CarListView(View):
+    form_class = CarSold
+    template_name = 'cars_project/index.html'
+
+    @method_decorator(login_required(login_url='login/'))
+    def get(self, request, *args, **kwargs):
+        car_list = Car.cars_for_user(user=request.user)
+        context = {'car_list': car_list}
+        #import ipdb; ipdb.set_trace()
+        return render(request, self.template_name, context)
+
+    @method_decorator(login_required(login_url='login/'))
+    def post(self, request, *args, **kwargs):
+
+        import ipdb; ipdb.set_trace()
+
 
 
 class CarFormEdit(View):

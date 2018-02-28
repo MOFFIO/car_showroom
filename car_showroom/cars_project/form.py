@@ -51,3 +51,7 @@ class CarFormAttributes(forms.ModelForm):
         fields = ['paint', 'tires', 'trim']
 
 
+class CarSold(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['sold']

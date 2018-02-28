@@ -7,7 +7,7 @@ from cars_project import views, form
 
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.CarListView.as_view(), name='index'),
     url(r'^login/$', form.LoginFormView.as_view(), name='login'),
     url(r'^logout/$', form.LogoutView.as_view(), name='logout'),
     url(r'^register/$', form.RegisterFormView.as_view(), name='register'),
