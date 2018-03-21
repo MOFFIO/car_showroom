@@ -41,7 +41,6 @@ class DealerShipFactory(DjangoModelFactory):
             return
 
         if extracted:
-            # A list of groups were passed in, use them
             for car in extracted:
                 self.cars.add(car)
 

@@ -8,10 +8,15 @@
 
 {% block script %}
 <script type="text/javascript" src="{% static 'cars_project/js/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript" src="{% static 'cars_project/js/getvalueusingclass.js' %}"></script>
+<script type="text/javascript" src="{% static 'cars_project/js/js.cookie.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
     $("#sort_table").tablesorter({sortList: [[0,0]]});
-    $("#buttonClass").click(function(){getValueUsingClass();});
+    $("#buttonSell").click(function(){SellCar();
+        return false;});
+    $("#buttonDel").click(function(){DeleteCar();
+        return false;});
     });
 </script>
 {% endblock %}
@@ -36,7 +41,7 @@
             </thead>
             <tbody>
                 {% for car in car_list %}
-                    <tr>
+                    <tr id="{{ car.id }}">
                     <td><a href="{% url 'car_detail' car_id=car.id %}" >{{ car.uid }}</a></td>
                     <td>{{ car.brand }}</td>
                     <td>{{ car.price }}</td>
@@ -45,7 +50,7 @@
                     <td>{{ car.attributes.trim }}</td>
                     <td>{{ car.sold }}
                     {% if not car.sold %}
-                    <input type="checkbox" value="{{ car.id }}" name="sold" class="chk" id="id_sold">
+                    <input type="checkbox" value="{{ car.id }}" name="sold" class="chk">
                     {% endif %}
                     </td>
                     </tr>
@@ -60,37 +65,64 @@
 
         </table>
         <form action="{% url 'car_form' %}">
-            <button type="submit">Create car</button>
+            <button>Create car</button>
         </form>
-        <form method="POST">
-            {% csrf_token %}
-            <button type="sumbit" id="buttonClass" class="buttonClass" >Sell Car</button>
+        <form>
+            <button id="buttonSell" >Sell Car</button>
+            <button id="buttonDel" >Delete Car</button>
         </form>
 
 {% endblock %}
 {% block pagescript %}
 <script type="text/javascript">
-function getValueUsingClass(){
-    /* declare an checkbox array */
-    var chkArray = [];
-
-    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+    function RemoveTable(){
     $(".chk:checked").each(function() {
-        chkArray.push($(this).val());
+        $(this).parent().parent().remove();
     });
+    }
+    function UpdateTable(){
+    $(".chk:checked").each(function() {
+        $(this).parent().text("True");
+    });
+    }
 
-    /* we join the array separated by the comma */
+    function SellCar(){
+        chkArray = getValueUsingClass();
     var selected;
-    selected = chkArray.join(',') ;
-
-    /* check if there is selected checkboxes, by default the length is 1 as it contains one single comma */
+    selected = chkArray.join(", ") ;
     if(selected.length > 0){
-        alert("You have selected " + selected);
+        alert("You have selected to sell " + selected);
     }else{
         alert("Please at least check one of the checkbox");
     }
-    $.post("/", { selected });
+    console.log( {id_list : selected} )
 
+    $.ajaxSetup({
+        headers: { "X-CSRFToken": Cookies.get("csrftoken") }
+    });
+
+    $.ajax({
+      url: "/",
+      type: "POST",
+      data: {
+             "id_list" : selected,
+             "update" : true
+            },
+      success: UpdateTable()
+    })
+
+}
+    function DeleteCar(){
+        chkArray = getValueUsingClass();
+    var selected;
+    selected = chkArray.join(", ") ;
+    if(selected.length > 0){
+        alert("You have selected to delete " + selected);
+    }else{
+        alert("Please at least check one of the checkbox");
+    }
+    console.log( {id_list : selected} )
+    $.post("/", {id_list : selected, csrfmiddlewaretoken : "{{csrf_token}}"}, RemoveTable());
 }
 </script>
 

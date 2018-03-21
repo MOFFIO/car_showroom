@@ -8,6 +8,35 @@ from django.core.management import call_command
 from cars_project.models import Car, User
 from cars_project.factories import UserFactory, CarFactory, DealerShipFactory
 
+import vcr
+import urllib2
+from vcr.config import VCR
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
+
+
+class MyTestVCR(TestCase):
+
+    def before_record_response(response):
+
+        body = response['body']['string']
+        response['body']['string'] = (body.replace(body, (json.dumps((json.loads(body)), indent=4, sort_keys=True)))).decode('utf-8')
+        #import ipdb; ipdb.set_trace()
+        return response
+
+
+    my_vcr = vcr.VCR(before_record_response=before_record_response)
+    with my_vcr.use_cassette('fixtures/vcr_cassettes/synopsis24.json') as cass:
+        response = urllib2.urlopen('http://127.0.0.1:9002/response_json/').read()
+        assert len(cass) == 1
+        assert cass.requests[0].uri == 'http://127.0.0.1:9002/response_json/'
+
+
+
 class MyTest(TestCase):
 
     def test_denies_anonymous_user(self):

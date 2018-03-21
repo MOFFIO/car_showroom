@@ -6,14 +6,13 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from cars_project.models import Car, RequestInfo
 from cars_project.form import CarForm, CarFormAttributes, CarSold
-
-
-# Create your views here.
+from cars_project.utils import digit_from_list
 
 
 def handler404(request):
@@ -22,17 +21,13 @@ def handler404(request):
     response.status_code = 404
     return response
 
-#@login_required(login_url='login/')
-#def index(request):
-#    car_list = Car.cars_for_user(user=request.user)
-#    context = {'car_list': car_list}
-#    return render(request, 'cars_project/index.html', context)
 
 @login_required(login_url='login/')
 def car_detail(request, car_id):
     cars = Car.cars_for_user(user=request.user)
     context = {'car': cars.get(id=car_id)}
     return render(request, 'cars_project/car_detail.html', context)
+
 
 @login_required(login_url='login/')
 def request_info(request):
@@ -43,6 +38,10 @@ def request_info(request):
     raise Http404('U are not SuperUser')
 
 
+def response_json(request):
+    car = Car.objects.get(id=8)
+    return JsonResponse(Car.car_as_dict(car))
+
 
 class CarListView(View):
     form_class = CarSold
@@ -52,13 +51,26 @@ class CarListView(View):
     def get(self, request, *args, **kwargs):
         car_list = Car.cars_for_user(user=request.user)
         context = {'car_list': car_list}
-        #import ipdb; ipdb.set_trace()
         return render(request, self.template_name, context)
 
+    @csrf_exempt
     @method_decorator(login_required(login_url='login/'))
     def post(self, request, *args, **kwargs):
+        print request.POST
+        id_list = request.POST.get('id_list')
+        upd = request.POST.get('update')
+        if id_list:
+            id_list = str(id_list)
+            int_id_list = digit_from_list(id_list)
+            car_list = (Car.objects.filter(id__in=int_id_list))
+            if upd:
+                pass
+                car_list.update(sold=True)
+            else:
+                car_list.delete()
+                pass
+        return JsonResponse({})
 
-        import ipdb; ipdb.set_trace()
 
 
 
