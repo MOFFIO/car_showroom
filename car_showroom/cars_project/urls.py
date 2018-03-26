@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^cars/(?P<car_id>\d+)/$', views.car_detail, name='car_detail'),
     url(r'^request_info/$', views.request_info, name='request_info'),
     url(r'^response_json/$', views.response_json, name='response_json'),
+
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

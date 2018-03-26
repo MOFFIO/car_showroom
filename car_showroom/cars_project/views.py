@@ -50,6 +50,7 @@ class CarListView(View):
     @method_decorator(login_required(login_url='login/'))
     def get(self, request, *args, **kwargs):
         car_list = Car.cars_for_user(user=request.user)
+        car_list = car_list.select_related('attributes')
         context = {'car_list': car_list}
         return render(request, self.template_name, context)
 
