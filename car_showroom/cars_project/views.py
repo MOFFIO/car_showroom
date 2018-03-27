@@ -65,11 +65,9 @@ class CarListView(View):
             int_id_list = digit_from_list(id_list)
             car_list = (Car.objects.filter(id__in=int_id_list))
             if upd:
-                pass
                 car_list.update(sold=True)
             else:
                 car_list.delete()
-                pass
         return JsonResponse({})
 
 
