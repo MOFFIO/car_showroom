@@ -57,7 +57,6 @@ class CarListView(View):
     @csrf_exempt
     @method_decorator(login_required(login_url='login/'))
     def post(self, request, *args, **kwargs):
-        print request.POST
         id_list = request.POST.get('id_list')
         upd = request.POST.get('update')
         if id_list:

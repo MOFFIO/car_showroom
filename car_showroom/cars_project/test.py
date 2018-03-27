@@ -25,7 +25,6 @@ class MyTestVCR(TestCase):
 
         body = response['body']['string']
         response['body']['string'] = (body.replace(body, (json.dumps((json.loads(body)), indent=4, sort_keys=True)))).decode('utf-8')
-        #import ipdb; ipdb.set_trace()
         return response
 
 
