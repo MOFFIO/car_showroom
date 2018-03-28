@@ -159,4 +159,11 @@ AUTH_USER_MODEL = 'cars_project.User'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+
+EMAIL_HOST = 'localhost'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 1027
+#EMAIL_USE_TLS = True
+
 #APPEND_SLASH = True

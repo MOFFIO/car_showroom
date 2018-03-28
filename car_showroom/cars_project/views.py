@@ -123,6 +123,7 @@ class CarCreate(View):
             car.attributes = car_attributes
             car.save()
             car.dealership_set.add(request.user.org)
+            #import ipdb; ipdb.set_trace()
             return HttpResponseRedirect(reverse('car_detail', args=(car.id,)))
         context = {'car_form': car_form, 'car_form_attributes': car_form_attributes}
         return render(request, self.template_name, context)
