@@ -73,8 +73,6 @@ class CarListView(View):
         return JsonResponse({})
 
 
-
-
 class CarFormEdit(View):
     form_class = CarForm
     form_attibutes_class = CarFormAttributes
