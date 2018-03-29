@@ -24,8 +24,9 @@ def handler404(request):
 
 
 @login_required(login_url='login/')
-@render_to_template('cars_project/request_info.html')
-def car_detail(request, car_id):
+@render_to_template('cars_project/car_detail.html')
+
+def car_detail(request, car_id, *args, **kwargs):
     cars = Car.cars_for_user(user=request.user)
     context = {'car': cars.get(id=car_id)}
     return context
@@ -124,7 +125,6 @@ class CarCreate(View):
             car.attributes = car_attributes
             car.save()
             car.dealership_set.add(request.user.org)
-            #import ipdb; ipdb.set_trace()
             return HttpResponseRedirect(reverse('car_detail', args=(car.id,)))
         context = {'car_form': car_form, 'car_form_attributes': car_form_attributes}
         return render(request, self.template_name, context)
