@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from cars_project.models import Car, RequestInfo
 from cars_project.form import CarForm, CarFormAttributes, CarSold
 from cars_project.utils import digit_from_list
-from cars_project.decorators import template
+from cars_project.decorators import render_to_template
 
 
 def handler404(request):
@@ -24,21 +24,21 @@ def handler404(request):
 
 
 @login_required(login_url='login/')
-@template('cars_project/request_info.html')
+@render_to_template('cars_project/request_info.html')
 def car_detail(request, car_id):
     cars = Car.cars_for_user(user=request.user)
     context = {'car': cars.get(id=car_id)}
+    return context
 
 
 @login_required(login_url='login/')
-@template('cars_project/request_info.html')
+@render_to_template('cars_project/request_info.html')
 def request_info(request, *args):
     if request.user.is_superuser:
         req_info = RequestInfo.objects.all()
         context = {'req_info': req_info}
-        #return render(request, 'cars_project/request_info.html', context)
-    else:
-        raise Http404('U are not SuperUser')
+        return context
+    raise Http404('U are not SuperUser')
 
 
 def response_json(request):
