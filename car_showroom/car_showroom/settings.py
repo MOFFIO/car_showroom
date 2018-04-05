@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'djcelery',
-    'cars_project'
+    'cars_project',
 ]
 
 MIDDLEWARE = [
@@ -168,9 +168,7 @@ EMAIL_PORT = 1027
 #EMAIL_USE_TLS = True
 
 
-
 BROKER_URL = "amqp://myuser:mypassword@localhost:5672/myvhost"
-
 
 
 CELERY_ACCEPT_CONTENT = ['json']
@@ -181,4 +179,6 @@ CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 
-#APPEND_SLASH = True
+ADMINS = (
+  ('My Name', 'me@mydomain.com'),
+)
