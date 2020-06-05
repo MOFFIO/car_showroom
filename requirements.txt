@@ -15,7 +15,7 @@ contextlib2==0.5.5
 cryptography==1.2.3
 decorator==4.1.2
 dirspec==13.10
-Django==1.11.15
+Django==1.11.29
 django-bootstrap3==9.1.0
 django-celery==3.2.2
 django-debug-toolbar==1.9.1
